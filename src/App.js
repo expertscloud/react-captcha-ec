@@ -124,6 +124,7 @@ const Recapcha = () => {
               <Select
                 value={captchaType}
                 onChange={(e) => setCaptchaType(e.target.value)}>
+                <MenuItem value="special_char">special characters</MenuItem>
                 <MenuItem value="lower">Lowercase Letters</MenuItem>
                 <MenuItem value="numbers">Numbers</MenuItem>
                 <Divider />
