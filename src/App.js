@@ -1,22 +1,18 @@
 import React, { useEffect, useState } from "react";
-import {
-  Box,
-  Button,
-  TextField,
-  Typography,
-  MenuItem,
-  FormControl,
-  Select,
-  Grid,
-  Divider,
-  InputLabel,
-} from "@mui/material";
+import { Box, Button, TextField, Typography, Grid } from "@mui/material";
 import {
   loadCaptchaEnginge,
-  LoadCanvasTemplateNoReload,
   validateCaptcha,
+  LoadCanvasTemplate,
 } from "react-simple-captcha";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import DropDownButton from "./components/DropDownButton";
+import {
+  backGroundColors,
+  captchaTypes,
+  fontColors,
+  lengthOfCaptcha,
+} from "./constants";
 
 const Recapcha = () => {
   const [userInput, setUserInput] = useState("");
@@ -24,8 +20,8 @@ const Recapcha = () => {
   const [verified, setVerified] = useState(null);
   const [backGroundColor, setBackGroundColor] = useState("white");
   const [fontColor, setFontColor] = useState("blue");
-  const [numChars, setNumChars] = useState(6);
-  const [captchaType, setCaptchaType] = useState("upper");
+  const [numChars, setNumChars] = useState(10);
+  const [captchaType, setCaptchaType] = useState("special_char");
 
   useEffect(() => {
     loadCaptchaEnginge(numChars, backGroundColor, fontColor, captchaType);
@@ -56,81 +52,45 @@ const Recapcha = () => {
       }}>
       <Box
         sx={{
-          width: "40%",
+          width: "60%",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
           flexDirection: "column",
           my: "auto",
         }}>
-        <Grid container spacing={2} justifyContent="space-between" my={2}>
+        <Grid container spacing={2} justifyContent="space-between" my={4}>
           <Grid item xs={12} md={3}>
-            <FormControl sx={{ marginBottom: "1rem" }} fullWidth>
-              <InputLabel id="font-color-select-label">
-                Background Color
-              </InputLabel>
-              <Select
-                value={backGroundColor}
-                onChange={(e) => setBackGroundColor(e.target.value)}
-                displayEmpty>
-                <MenuItem value="grey">Grey</MenuItem>
-                <MenuItem value="red">Red</MenuItem>
-                <MenuItem value="silver">Silver</MenuItem>
-                <MenuItem value="blue">Blue</MenuItem>
-                <MenuItem value="green">Green</MenuItem>
-                <Divider />
-                <MenuItem value="white">White</MenuItem>
-              </Select>
-            </FormControl>
+            <DropDownButton
+              selectedValue={backGroundColor}
+              setSelectedValue={setBackGroundColor}
+              data={backGroundColors.values}
+              buttonName={backGroundColors.buttonText}
+            />
           </Grid>
           <Grid item xs={12} md={3}>
-            <FormControl sx={{ marginBottom: "1rem" }} fullWidth>
-              <InputLabel id="font-color-select-label">Font Color</InputLabel>
-              <Select
-                value={fontColor}
-                onChange={(e) => setFontColor(e.target.value)}
-                displayEmpty>
-                <MenuItem value="white">White</MenuItem>
-                <MenuItem value="grey">Grey</MenuItem>
-                <MenuItem value="red">Red</MenuItem>
-                <MenuItem value="silver">Silver</MenuItem>
-                <MenuItem value="green">Green</MenuItem>
-                <Divider />
-                <MenuItem value="blue">Blue</MenuItem>
-              </Select>
-            </FormControl>
+            <DropDownButton
+              selectedValue={fontColor}
+              setSelectedValue={setFontColor}
+              data={fontColors.values}
+              buttonName={fontColors.buttonText}
+            />
           </Grid>
           <Grid item xs={12} md={3}>
-            <FormControl sx={{ marginBottom: "1rem" }} fullWidth>
-              <InputLabel id="font-color-select-label">
-                Set Char Number
-              </InputLabel>
-              <Select
-                value={numChars}
-                onChange={(e) => setNumChars(e.target.value)}
-                displayEmpty>
-                <MenuItem value={8}>8 Characters</MenuItem>
-                <MenuItem value={10}>10 Characters</MenuItem>
-                <Divider />
-                <MenuItem value={6}>6 Characters</MenuItem>
-              </Select>
-            </FormControl>
+            <DropDownButton
+              selectedValue={numChars}
+              setSelectedValue={setNumChars}
+              data={lengthOfCaptcha.values}
+              buttonName={lengthOfCaptcha.buttonText}
+            />
           </Grid>
           <Grid item xs={12} md={3}>
-            <FormControl sx={{ marginBottom: "1rem" }} fullWidth>
-              <InputLabel id="font-color-select-label">
-                Set captcha Type
-              </InputLabel>
-              <Select
-                value={captchaType}
-                onChange={(e) => setCaptchaType(e.target.value)}>
-                <MenuItem value="special_char">special characters</MenuItem>
-                <MenuItem value="lower">Lowercase Letters</MenuItem>
-                <MenuItem value="numbers">Numbers</MenuItem>
-                <Divider />
-                <MenuItem value="upper">Uppercase Letters</MenuItem>
-              </Select>
-            </FormControl>
+            <DropDownButton
+              selectedValue={captchaType}
+              setSelectedValue={setCaptchaType}
+              data={captchaTypes.values}
+              buttonName={captchaTypes.buttonText}
+            />
           </Grid>
         </Grid>
         {verified ? (
@@ -147,9 +107,13 @@ const Recapcha = () => {
           </>
         ) : (
           <>
-            <LoadCanvasTemplateNoReload />
-            <TextField value={userInput} onChange={handleInputChange} />
-            <Button variant="contained" sx={{ mt: 1 }} onClick={handleVerify}>
+            <LoadCanvasTemplate />
+            <TextField
+              value={userInput}
+              onChange={handleInputChange}
+              sx={{ mt: 1 }}
+            />
+            <Button variant="contained" sx={{ mt: 2 }} onClick={handleVerify}>
               Verify
             </Button>
             {isError && (
