@@ -1,3 +1,5 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/8c49f46f-e1ed-4201-b026-a727c63be585/deploy-status)](https://app.netlify.com/sites/react-captcha-ec/deploys)
+
 # React CAPTCHA
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
