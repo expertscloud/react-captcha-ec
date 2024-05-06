@@ -1,3 +1,13 @@
+Follow us on social media:
+
+- [Facebook](https://www.facebook.com/Expertscloud)
+- [LinkedIn](https://www.linkedin.com/company/expertscloud-pvt-limited)
+- [Instagram](https://www.instagram.com/lifeatexpertscloud/)
+
+ExpertsCloud provides DevOps services for companies of all sizes. We ensure end-to-end software delivery automation, as well as security of infrastructure in the company.
+
+---
+
 [![Netlify Status](https://api.netlify.com/api/v1/badges/8c49f46f-e1ed-4201-b026-a727c63be585/deploy-status)](https://app.netlify.com/sites/react-captcha-ec/deploys)
 
 # React CAPTCHA
@@ -24,4 +34,4 @@ This project is using Node.js version 18
 
 This project is deployed at: [https://react-captcha-ec.netlify.app](https://react-captcha-ec.netlify.app)
 
-...
+---
