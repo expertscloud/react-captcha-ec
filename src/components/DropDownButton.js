@@ -8,7 +8,6 @@ import {
   Divider,
 } from "@mui/material";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import { makeStyles } from "@mui/styles";
 
 const DropDownButton = ({
   selectedValue,
@@ -16,7 +15,6 @@ const DropDownButton = ({
   data,
   buttonName,
 }) => {
-  const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleOptionClick = (option) => {
@@ -36,7 +34,11 @@ const DropDownButton = ({
 
       {anchorEl ? (
         <Menu
-          className={classes.menuContainer}
+          sx={{
+            "& .MuiList-root": {
+              width: "100%",
+            },
+          }}
           anchorEl={anchorEl}
           open={true}
           onClose={() => setAnchorEl(null)}
@@ -49,17 +51,23 @@ const DropDownButton = ({
             vertical: "top",
             horizontal: "left",
           }}>
-          <List className={classes.root}>
+          <List sx={{ padding: 0 }}>
             {data?.map((option, i) => (
               <ListItem
                 button
                 key={i}
-                className={classes.nested}
+                sx={{ padding: 0, height: "39px" }}
                 selected={option.value === selectedValue}
                 onClick={() => handleOptionClick(option)}>
                 <ListItemText
                   primary={
-                    <p className={classes.listItemLabel}>
+                    <p
+                      style={{
+                        overflow: "hidden",
+                        whiteSpace: "nowrap",
+                        textOverflow: "ellipsis",
+                        margin: "0 10px",
+                      }}>
                       {option?.default ? (
                         <Divider sx={{ mb: 1, border: "1px solid gray" }} />
                       ) : null}
@@ -77,24 +85,3 @@ const DropDownButton = ({
 };
 
 export default DropDownButton;
-
-const useStyles = makeStyles(() => ({
-  menuContainer: {
-    "& .MuiList-root": {
-      width: "100%",
-    },
-  },
-  root: {
-    padding: "0",
-  },
-  nested: {
-    padding: 0,
-    height: "39px",
-  },
-  listItemLabel: {
-    overflow: "hidden",
-    whiteSpace: "nowrap",
-    textOverflow: "ellipsis",
-    margin: "0 10px",
-  },
-}));
