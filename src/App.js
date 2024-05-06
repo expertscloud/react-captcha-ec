@@ -111,7 +111,7 @@ const Recapcha = () => {
             <TextField
               value={userInput}
               onChange={handleInputChange}
-              sx={{ mt: 1 }}
+              sx={{ mt: 3 }}
             />
             <Button variant="contained" sx={{ mt: 2 }} onClick={handleVerify}>
               Verify

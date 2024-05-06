@@ -1,13 +1,37 @@
 import React, { useState } from "react";
 import {
-  List,
-  Menu,
   Button,
   ListItem,
   ListItemText,
+  List,
+  Menu,
   Divider,
 } from "@mui/material";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import { styled } from "@mui/material/styles";
+
+// Styled components
+const StyledButton = styled(Button)({
+  width: "100%",
+});
+
+const StyledMenu = styled(Menu)({
+  "& .MuiList-root": {
+    width: "200px", // Adjust the width as needed
+  },
+});
+
+const StyledListItem = styled(ListItem)({
+  padding: 0,
+  height: "39px",
+});
+
+const StyledListItemText = styled(ListItemText)({
+  overflow: "hidden",
+  whiteSpace: "nowrap",
+  textOverflow: "ellipsis",
+  margin: "0 10px",
+});
 
 const DropDownButton = ({
   selectedValue,
@@ -24,21 +48,16 @@ const DropDownButton = ({
 
   return (
     <>
-      <Button
+      <StyledButton
         variant="contained"
         fullWidth
         endIcon={<ArrowDropDownIcon />}
         onClick={(event) => setAnchorEl(event.currentTarget)}>
         {buttonName}
-      </Button>
+      </StyledButton>
 
       {anchorEl ? (
-        <Menu
-          sx={{
-            "& .MuiList-root": {
-              width: "100%",
-            },
-          }}
+        <StyledMenu
           anchorEl={anchorEl}
           open={true}
           onClose={() => setAnchorEl(null)}
@@ -53,32 +72,25 @@ const DropDownButton = ({
           }}>
           <List sx={{ padding: 0 }}>
             {data?.map((option, i) => (
-              <ListItem
+              <StyledListItem
                 button
                 key={i}
-                sx={{ padding: 0, height: "39px" }}
                 selected={option.value === selectedValue}
                 onClick={() => handleOptionClick(option)}>
-                <ListItemText
+                <StyledListItemText
                   primary={
-                    <p
-                      style={{
-                        overflow: "hidden",
-                        whiteSpace: "nowrap",
-                        textOverflow: "ellipsis",
-                        margin: "0 10px",
-                      }}>
-                      {option?.default ? (
+                    <>
+                      {option?.default && (
                         <Divider sx={{ mb: 1, border: "1px solid gray" }} />
-                      ) : null}
+                      )}
                       {option.label}
-                    </p>
+                    </>
                   }
                 />
-              </ListItem>
+              </StyledListItem>
             ))}
           </List>
-        </Menu>
+        </StyledMenu>
       ) : null}
     </>
   );
