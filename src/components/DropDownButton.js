@@ -10,14 +10,13 @@ import {
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { styled } from "@mui/material/styles";
 
-// Styled components
 const StyledButton = styled(Button)({
   width: "100%",
 });
 
 const StyledMenu = styled(Menu)({
   "& .MuiList-root": {
-    width: "200px", // Adjust the width as needed
+    width: "200px",
   },
 });
 
@@ -36,8 +35,8 @@ const StyledListItemText = styled(ListItemText)({
 const DropDownButton = ({
   selectedValue,
   setSelectedValue,
-  data,
-  buttonName,
+  options,
+  buttonType,
 }) => {
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -53,7 +52,7 @@ const DropDownButton = ({
         fullWidth
         endIcon={<ArrowDropDownIcon />}
         onClick={(event) => setAnchorEl(event.currentTarget)}>
-        {buttonName}
+        {buttonType}
       </StyledButton>
 
       {anchorEl ? (
@@ -71,7 +70,7 @@ const DropDownButton = ({
             horizontal: "left",
           }}>
           <List sx={{ padding: 0 }}>
-            {data?.map((option, i) => (
+            {options.map((option, i) => (
               <StyledListItem
                 button
                 key={i}
@@ -80,7 +79,7 @@ const DropDownButton = ({
                 <StyledListItemText
                   primary={
                     <>
-                      {option?.default && (
+                      {option.default && (
                         <Divider sx={{ mb: 1, border: "1px solid gray" }} />
                       )}
                       {option.label}

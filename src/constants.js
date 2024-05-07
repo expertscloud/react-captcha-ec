@@ -1,6 +1,5 @@
-export const backGroundColors = {
-  buttonText: "Background Color",
-  values: [
+export const captchaOptions = {
+  backGroundColor: [
     { value: "grey", label: "Grey" },
     { value: "red", label: "Red" },
     { value: "silver", label: "Silver" },
@@ -8,11 +7,7 @@ export const backGroundColors = {
     { value: "green", label: "Green" },
     { value: "white", label: "White", default: true },
   ],
-};
-
-export const fontColors = {
-  buttonText: "Font Color",
-  values: [
+  fontColor: [
     { value: "white", label: "White" },
     { value: "grey", label: "Grey" },
     { value: "red", label: "Red" },
@@ -20,23 +15,23 @@ export const fontColors = {
     { value: "green", label: "Green" },
     { value: "blue", label: "Blue", default: true },
   ],
-};
-export const captchaTypes = {
-  buttonText: "Captcha Type",
-  values: [
+  captchaType: [
     { value: "upper", label: "Uppercase Letters" },
     { value: "lower", label: "Lowercase Letters" },
     { value: "numbers", label: "Numbers" },
     { value: "special_char", label: "Special Characters", default: true },
   ],
-};
-
-export const lengthOfCaptcha = {
-  buttonText: "Length of Captcha",
-  values: [
+  lengthOfCaptcha: [
     { value: 4, label: "4 Characters" },
     { value: 6, label: "6 Characters" },
     { value: 8, label: "8 Characters" },
     { value: 10, label: "10 Characters", default: true },
   ],
+};
+
+export const buttonTexts = {
+  backGroundColor: "Background Color",
+  fontColor: "Font Color",
+  captchaType: "Captcha Type",
+  lengthOfCaptcha: "Length of Captcha",
 };

@@ -7,25 +7,27 @@ import {
 } from "react-simple-captcha";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import DropDownButton from "./components/DropDownButton";
-import {
-  backGroundColors,
-  captchaTypes,
-  fontColors,
-  lengthOfCaptcha,
-} from "./constants";
+import { captchaOptions, buttonTexts } from "./constants";
 
 const Recapcha = () => {
+  const [captchaSettings, setCaptchaSettings] = useState({
+    backGroundColor: "white",
+    fontColor: "blue",
+    numChars: 10,
+    captchaType: "special_char",
+  });
   const [userInput, setUserInput] = useState("");
   const [isError, setIsError] = useState(false);
-  const [verified, setVerified] = useState(null);
-  const [backGroundColor, setBackGroundColor] = useState("white");
-  const [fontColor, setFontColor] = useState("blue");
-  const [numChars, setNumChars] = useState(10);
-  const [captchaType, setCaptchaType] = useState("special_char");
+  const [isVerified, setIsVerified] = useState(null);
 
   useEffect(() => {
-    loadCaptchaEnginge(numChars, backGroundColor, fontColor, captchaType);
-  }, [numChars, fontColor, captchaType, backGroundColor]);
+    loadCaptchaEnginge(
+      captchaSettings.numChars,
+      captchaSettings.backGroundColor,
+      captchaSettings.fontColor,
+      captchaSettings.captchaType
+    );
+  }, [captchaSettings]);
 
   const handleInputChange = (event) => {
     setUserInput(event.target.value);
@@ -34,10 +36,17 @@ const Recapcha = () => {
   const handleVerify = () => {
     const result = validateCaptcha(userInput, false);
     if (result) {
-      setVerified(true);
+      setIsVerified(true);
     } else {
       setIsError(true);
     }
+  };
+
+  const handleSettingChange = (key, value) => {
+    setCaptchaSettings((prevSettings) => ({
+      ...prevSettings,
+      [key]: value,
+    }));
   };
 
   return (
@@ -47,7 +56,6 @@ const Recapcha = () => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-
         backgroundColor: "#f5f5f5",
       }}>
       <Box
@@ -60,40 +68,20 @@ const Recapcha = () => {
           my: "auto",
         }}>
         <Grid container spacing={2} justifyContent="space-between" my={4}>
-          <Grid item xs={12} md={3}>
-            <DropDownButton
-              selectedValue={backGroundColor}
-              setSelectedValue={setBackGroundColor}
-              data={backGroundColors.values}
-              buttonName={backGroundColors.buttonText}
-            />
-          </Grid>
-          <Grid item xs={12} md={3}>
-            <DropDownButton
-              selectedValue={fontColor}
-              setSelectedValue={setFontColor}
-              data={fontColors.values}
-              buttonName={fontColors.buttonText}
-            />
-          </Grid>
-          <Grid item xs={12} md={3}>
-            <DropDownButton
-              selectedValue={numChars}
-              setSelectedValue={setNumChars}
-              data={lengthOfCaptcha.values}
-              buttonName={lengthOfCaptcha.buttonText}
-            />
-          </Grid>
-          <Grid item xs={12} md={3}>
-            <DropDownButton
-              selectedValue={captchaType}
-              setSelectedValue={setCaptchaType}
-              data={captchaTypes.values}
-              buttonName={captchaTypes.buttonText}
-            />
-          </Grid>
+          {Object.keys(captchaOptions).map((optionType) => (
+            <Grid item xs={12} md={3} key={optionType}>
+              <DropDownButton
+                selectedValue={captchaSettings[optionType]}
+                setSelectedValue={(value) =>
+                  handleSettingChange(optionType, value)
+                }
+                options={captchaOptions[optionType]}
+                buttonType={buttonTexts[optionType]}
+              />
+            </Grid>
+          ))}
         </Grid>
-        {verified ? (
+        {isVerified ? (
           <>
             <CheckCircleIcon
               color="success"
