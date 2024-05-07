@@ -5,9 +5,9 @@ ExpertsCloud provides DevOps services for companies of all sizes. We ensure end-
 
 Follow us on social media:
 
-<a href="https://www.facebook.com/Expertscloud" target="_blank"><img src="public/facebook.png" alt="Facebook" width="50" height="50"></a>
-<a href="https://www.linkedin.com/company/expertscloud-pvt-limited" target="_blank"><img src="public/linkedin.png" alt="LinkedIn" width="50" height="50"></a>
-<a href="https://www.instagram.com/lifeatexpertscloud/" target="_blank"><img src="public/instagram.jpeg" alt="Instagram" width="50" height="50"></a>
+<a href="https://www.facebook.com/Expertscloud" target="_blank"><img src="https://example.com/facebook_icon.png" alt="Facebook" width="25" height="25" style="margin-right: 5px;"></a>
+<a href="https://www.linkedin.com/company/expertscloud-pvt-limited" target="_blank"><img src="https://example.com/linkedin_icon.png" alt="LinkedIn" width="25" height="50" style="margin-right: 5px;"></a>
+<a href="https://www.instagram.com/lifeatexpertscloud/" target="_blank"><img src="https://example.com/instagram_icon.png" alt="Instagram" width="25" height="25" style="margin-right: 5px;"></a>
 
 ---
 
