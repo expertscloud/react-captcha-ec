@@ -21,7 +21,7 @@ export const captchaOptions = {
     { value: "numbers", label: "Numbers" },
     { value: "special_char", label: "Special Characters", default: true },
   ],
-  lengthOfCaptcha: [
+  numberOfChars: [
     { value: 4, label: "4 Characters" },
     { value: 6, label: "6 Characters" },
     { value: 8, label: "8 Characters" },
@@ -33,5 +33,5 @@ export const buttonTexts = {
   backGroundColor: "Background Color",
   fontColor: "Font Color",
   captchaType: "Captcha Type",
-  lengthOfCaptcha: "Length of Captcha",
+  numberOfChars: "Length of Captcha",
 };

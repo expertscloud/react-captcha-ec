@@ -9,6 +9,7 @@ import {
 } from "@mui/material";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { styled } from "@mui/material/styles";
+import { buttonTexts } from "../constants";
 
 const StyledButton = styled(Button)({
   width: "100%",
@@ -32,12 +33,7 @@ const StyledListItemText = styled(ListItemText)({
   margin: "0 10px",
 });
 
-const DropDownButton = ({
-  selectedValue,
-  setSelectedValue,
-  options,
-  buttonType,
-}) => {
+const DropDownButton = ({ keyValue, setSelectedValue, options }) => {
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleOptionClick = (option) => {
@@ -52,7 +48,7 @@ const DropDownButton = ({
         fullWidth
         endIcon={<ArrowDropDownIcon />}
         onClick={(event) => setAnchorEl(event.currentTarget)}>
-        {buttonType}
+        {buttonTexts[keyValue]}
       </StyledButton>
 
       {anchorEl ? (
@@ -74,7 +70,6 @@ const DropDownButton = ({
               <StyledListItem
                 button
                 key={i}
-                selected={option.value === selectedValue}
                 onClick={() => handleOptionClick(option)}>
                 <StyledListItemText
                   primary={

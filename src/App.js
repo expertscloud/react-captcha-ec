@@ -7,13 +7,13 @@ import {
 } from "react-simple-captcha";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import DropDownButton from "./components/DropDownButton";
-import { captchaOptions, buttonTexts } from "./constants";
+import { captchaOptions } from "./constants";
 
 const Recapcha = () => {
   const [captchaSettings, setCaptchaSettings] = useState({
     backGroundColor: "white",
     fontColor: "blue",
-    numChars: 10,
+    numberOfChars: 10,
     captchaType: "special_char",
   });
   const [userInput, setUserInput] = useState("");
@@ -22,7 +22,7 @@ const Recapcha = () => {
 
   useEffect(() => {
     loadCaptchaEnginge(
-      captchaSettings.numChars,
+      captchaSettings.numberOfChars,
       captchaSettings.backGroundColor,
       captchaSettings.fontColor,
       captchaSettings.captchaType
@@ -71,12 +71,11 @@ const Recapcha = () => {
           {Object.keys(captchaOptions).map((optionType) => (
             <Grid item xs={12} md={3} key={optionType}>
               <DropDownButton
-                selectedValue={captchaSettings[optionType]}
+                keyValue={optionType}
                 setSelectedValue={(value) =>
                   handleSettingChange(optionType, value)
                 }
                 options={captchaOptions[optionType]}
-                buttonType={buttonTexts[optionType]}
               />
             </Grid>
           ))}
