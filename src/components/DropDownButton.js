@@ -42,7 +42,6 @@ const DropDownButton = ({ buttonKey, selectedvalue, setValue }) => {
     <>
       <Button
         variant="contained"
-        // fullWidth
         endIcon={<ArrowDropDownIcon />}
         onClick={(event) => setAnchorEl(event.currentTarget)}>
         {buttonTexts[buttonKey]}

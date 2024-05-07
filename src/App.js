@@ -15,10 +15,10 @@ import { captchaOptions } from "./constants";
 
 const Recapcha = () => {
   const [captchaSettings, setCaptchaSettings] = useState({
-    backGroundColor: "white",
-    fontColor: "blue",
-    numberOfChars: 10,
-    captchaType: "special_char",
+    backGroundColor: captchaOptions["backGroundColor"][5].value,
+    fontColor: captchaOptions["fontColor"][5].value,
+    numberOfChars: captchaOptions["numberOfChars"][3].value,
+    captchaType: captchaOptions["captchaType"][3].value,
   });
   const [userInput, setUserInput] = useState("");
   const [isError, setIsError] = useState(false);
@@ -67,7 +67,7 @@ const Recapcha = () => {
             justifyContent="center">
             <DropDownButton
               buttonKey={buttonKey}
-              selectedvalue={captchaOptions[buttonKey]}
+              selectedvalue={captchaSettings[buttonKey]}
               setValue={setCaptchaSettings}
             />
           </Grid>
