@@ -1,5 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { Box, Button, TextField, Typography, Grid } from "@mui/material";
+import React, { useCallback, useEffect, useState } from "react";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
+import Grid from "@mui/material/Grid";
 import {
   loadCaptchaEnginge,
   validateCaptcha,
@@ -29,25 +33,18 @@ const Recapcha = () => {
     );
   }, [captchaSettings]);
 
-  const handleInputChange = (event) => {
+  const handleInputChange = useCallback((event) => {
     setUserInput(event.target.value);
-  };
+  }, []);
 
-  const handleVerify = () => {
+  const handleVerify = useCallback(() => {
     const result = validateCaptcha(userInput, false);
     if (result) {
       setIsVerified(true);
     } else {
       setIsError(true);
     }
-  };
-
-  const handleSettingChange = (key, value) => {
-    setCaptchaSettings((prevSettings) => ({
-      ...prevSettings,
-      [key]: value,
-    }));
-  };
+  }, []);
 
   return (
     <Box
@@ -57,60 +54,55 @@ const Recapcha = () => {
         justifyContent: "center",
         alignItems: "center",
         backgroundColor: "#f5f5f5",
+        flexDirection: "column",
       }}>
-      <Box
-        sx={{
-          width: "60%",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          flexDirection: "column",
-          my: "auto",
-        }}>
-        <Grid container spacing={2} justifyContent="space-between" my={4}>
-          {Object.keys(captchaOptions).map((optionType) => (
-            <Grid item xs={12} md={3} key={optionType}>
-              <DropDownButton
-                keyValue={optionType}
-                setSelectedValue={(value) =>
-                  handleSettingChange(optionType, value)
-                }
-                options={captchaOptions[optionType]}
-              />
-            </Grid>
-          ))}
-        </Grid>
-        {isVerified ? (
-          <>
-            <CheckCircleIcon
-              color="success"
-              sx={{ height: "100px", width: "100px" }}
+      <Grid container spacing={2} my={4} justifyContent="center">
+        {Object.keys(captchaOptions).map((buttonKey) => (
+          <Grid
+            container
+            item
+            xs={12}
+            md="auto"
+            key={buttonKey}
+            justifyContent="center">
+            <DropDownButton
+              buttonKey={buttonKey}
+              selectedvalue={captchaOptions[buttonKey]}
+              setValue={setCaptchaSettings}
             />
-            <Typography
-              variant="body1"
-              sx={{ fontSize: "20px", textAlign: "center" }}>
-              Verified
-            </Typography>
-          </>
-        ) : (
-          <>
-            <LoadCanvasTemplate />
-            <TextField
-              value={userInput}
-              onChange={handleInputChange}
-              sx={{ mt: 3 }}
-            />
-            <Button variant="contained" sx={{ mt: 2 }} onClick={handleVerify}>
-              Verify
-            </Button>
-            {isError && (
-              <p style={{ color: "red" }}>
-                Incorrect reCAPTCHA. Please try again.
-              </p>
-            )}
-          </>
-        )}
-      </Box>
+          </Grid>
+        ))}
+      </Grid>
+      {isVerified ? (
+        <>
+          <CheckCircleIcon
+            color="success"
+            sx={{ height: "100px", width: "100px" }}
+          />
+          <Typography
+            variant="body1"
+            sx={{ fontSize: "20px", textAlign: "center" }}>
+            Verified
+          </Typography>
+        </>
+      ) : (
+        <>
+          <LoadCanvasTemplate />
+          <TextField
+            value={userInput}
+            onChange={handleInputChange}
+            sx={{ mt: 3 }}
+          />
+          <Button variant="contained" sx={{ mt: 2 }} onClick={handleVerify}>
+            Verify
+          </Button>
+          {isError && (
+            <p style={{ color: "red" }}>
+              Incorrect reCAPTCHA. Please try again.
+            </p>
+          )}
+        </>
+      )}
     </Box>
   );
 };

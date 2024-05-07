@@ -1,19 +1,13 @@
-import React, { useState } from "react";
-import {
-  Button,
-  ListItem,
-  ListItemText,
-  List,
-  Menu,
-  Divider,
-} from "@mui/material";
+import { useCallback, useState } from "react";
+import Button from "@mui/material/Button";
+import ListItem from "@mui/material/ListItem";
+import ListItemText from "@mui/material/ListItemText";
+import List from "@mui/material/List";
+import Menu from "@mui/material/Menu";
+import Divider from "@mui/material/Divider";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { styled } from "@mui/material/styles";
-import { buttonTexts } from "../constants";
-
-const StyledButton = styled(Button)({
-  width: "100%",
-});
+import { buttonTexts, captchaOptions } from "../constants";
 
 const StyledMenu = styled(Menu)({
   "& .MuiList-root": {
@@ -33,43 +27,37 @@ const StyledListItemText = styled(ListItemText)({
   margin: "0 10px",
 });
 
-const DropDownButton = ({ keyValue, setSelectedValue, options }) => {
+const DropDownButton = ({ buttonKey, selectedvalue, setValue }) => {
   const [anchorEl, setAnchorEl] = useState(null);
 
-  const handleOptionClick = (option) => {
-    setSelectedValue(option.value);
+  const handleOptionClick = useCallback((option) => {
+    setValue((prevVal) => ({ ...prevVal, [buttonKey]: option.value }));
     setAnchorEl(null);
-  };
+  }, []);
 
   return (
     <>
-      <StyledButton
+      <Button
         variant="contained"
-        fullWidth
+        // fullWidth
         endIcon={<ArrowDropDownIcon />}
         onClick={(event) => setAnchorEl(event.currentTarget)}>
-        {buttonTexts[keyValue]}
-      </StyledButton>
+        {buttonTexts[buttonKey]}
+      </Button>
 
       {anchorEl ? (
         <StyledMenu
           anchorEl={anchorEl}
           open={true}
           onClose={() => setAnchorEl(null)}
-          getContentAnchorEl={null}
-          anchorOrigin={{
-            vertical: "bottom",
-            horizontal: "left",
-          }}
-          transformOrigin={{
-            vertical: "top",
-            horizontal: "left",
-          }}>
+          anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+          transformOrigin={{ vertical: "top", horizontal: "left" }}>
           <List sx={{ padding: 0 }}>
-            {options.map((option, i) => (
+            {captchaOptions[buttonKey].map((option, i) => (
               <StyledListItem
                 button
                 key={i}
+                selected={option.value === selectedvalue}
                 onClick={() => handleOptionClick(option)}>
                 <StyledListItemText
                   primary={
