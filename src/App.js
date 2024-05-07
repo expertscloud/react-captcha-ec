@@ -44,7 +44,7 @@ const Recapcha = () => {
     } else {
       setIsError(true);
     }
-  }, []);
+  }, [userInput]);
 
   return (
     <Box

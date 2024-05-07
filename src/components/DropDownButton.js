@@ -30,10 +30,13 @@ const StyledListItemText = styled(ListItemText)({
 const DropDownButton = ({ buttonKey, selectedvalue, setValue }) => {
   const [anchorEl, setAnchorEl] = useState(null);
 
-  const handleOptionClick = useCallback((option) => {
-    setValue((prevVal) => ({ ...prevVal, [buttonKey]: option.value }));
-    setAnchorEl(null);
-  }, []);
+  const handleOptionClick = useCallback(
+    (option) => {
+      setValue((prevVal) => ({ ...prevVal, [buttonKey]: option.value }));
+      setAnchorEl(null);
+    },
+    [setValue, setAnchorEl, buttonKey]
+  );
 
   return (
     <>
