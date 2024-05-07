@@ -1,6 +1,6 @@
 # ExpertsCloud
 
-<img width="30px" src="public/logo.png"/>
+<img width="200px" src="public/logo.png"/>
 ExpertsCloud provides DevOps services for companies of all sizes. We ensure end-to-end software delivery automation, as well as security of infrastructure in the company.
 
 Follow us on social media:
