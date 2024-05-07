@@ -1,12 +1,12 @@
-# React CAPTCHA
+# ExpertsCloud
+
+ExpertsCloud provides DevOps services for companies of all sizes. We ensure end-to-end software delivery automation, as well as security of infrastructure in the company.
 
 Follow us on social media:
 
 - [Facebook](https://www.facebook.com/Expertscloud)
 - [LinkedIn](https://www.linkedin.com/company/expertscloud-pvt-limited)
 - [Instagram](https://www.instagram.com/lifeatexpertscloud/)
-
-ExpertsCloud provides DevOps services for companies of all sizes. We ensure end-to-end software delivery automation, as well as security of infrastructure in the company.
 
 ---
 
